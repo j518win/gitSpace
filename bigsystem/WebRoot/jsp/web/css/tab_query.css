@@ -1,0 +1,80 @@
+body, td, th {
+	font-size: 12px;
+	color: #333;
+	font-family:Verdana, Geneva, sans-serif;
+}
+body {
+	background: #FFF;
+}
+#userbox, #userpwd, #loginbtn, .blueBtn, .blackBtn,.op_centent{
+	background:url(images/form_elements2.gif) 0 0 no-repeat;
+	height:22px;
+	width:103px;
+	border:none;
+}
+a:link,a:visited{ text-decoration:none; color:#213f88;}
+a:hover,a:active{ text-decoration:underline;color:#1f54bc;}
+a.zeng,a.shan,a.xiu,a.cha,a.zuo{ background:url(images/form_elements2.gif) -251px 0 no-repeat; font-size:12px;padding-left:22px;}
+a.cha{background-position:-252px -3px; }
+a.zeng{background-position:-252px -28px;}
+a.xiu{background-position:-252px -54px;}
+a.shan{background-position:-252px -78px;}
+a.zuo{background-position:-252px -103px;}
+
+.redtxt {color:#F00;}
+.bor_top {border-top: solid 1px #999;}
+.inputbox {
+	border: solid 1px #999999;
+	background-color:#FFF;
+	height:18px;
+	width:120px;
+}
+.inputbox_hover {
+	border: solid 1px #3d73aa;
+	background-color:#c3efff;
+	height:18px;
+	width:120px;
+}
+.textareabox {
+	height:80px;
+	width:250px;
+	border: solid 1px #999999;
+	background-color:#FFF;
+}
+.textareabox_hover {
+	height:80px;
+	width:250px;
+	border: solid 1px #3d73aa;
+	background-color:#c3efff;
+}
+#check_table{ background:#FFF;}
+#check_table td{vertical-align:middle;}
+#check_table .op_centent{ width:100%;border: solid 1px #999;background-position:0 -154px; background-repeat:repeat-x;}
+#check_table .op_centent form{  padding:10px 5px 0 5px;}
+#infoTab {background:#FFF;border: solid 1px #999;}
+#infoTab td {
+	height:27px;
+	vertical-align:middle;
+	padding-left:5px;
+	cursor:pointer;
+}
+.nomal_tr {
+	background:#FFF;
+}
+.color_tr {
+	background:#eef8ff;
+}
+.light_tr {
+	background-color:#559FEB;
+}
+.light_tr td {
+	color:#FFF;
+}
+.fpdjinput {
+	BACKGROUND:;
+	FONT-SIZE: 9pt;
+	border-top: 1px none #000000;
+	border-right: 1px none #000000;
+	border-bottom: 1px dotted #000000;
+	border-left: 1px none #000000;
+}

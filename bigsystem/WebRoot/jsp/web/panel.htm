@@ -1,0 +1,62 @@
+<HTML>
+<HEAD>
+<TITLE>系统面板</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/gt.css" rel="stylesheet" type="text/css"/>
+<SCRIPT language="JavaScript" src="js/function.js"></SCRIPT>
+<SCRIPT language="JavaScript" src="js/tabpane.js"></SCRIPT>
+<style>
+	body{ margin-left:5px;}
+</style>
+</HEAD>
+<BODY>
+<script>
+	var tp = new TabPane("p1", "100%", "100%");
+	//tp.addItem(new TabItem("用户数据查询", "../sitech/rcwh/yjtj/yjtj.jsp"));	
+	tp.loadPane();
+	function openTab(context,url)
+	{
+//	  if (tp._items.length>=10) 
+//	  {
+	   //alert("系统最多允许打开10个窗口！")
+//	   return
+//	  }
+//	  else {
+	  //暂时屏蔽掉
+	  for(i=0;i<tp._items.length;i++)
+	  {
+	   if (tp._items[i]._url==url) 
+	   {
+	     //alert("该连接已打开！请勿重复打开！"); 
+	     tp.selectItem(tp._items[i])  ;
+	     return false
+	   }	   
+	  }
+	  tp.insertItemAt(new TabItem(context, url),tp._items.length);
+//	  }
+	}
+	function delcurrentpan(){
+		tp.removeItem(tp.getSelectedItem())
+//		tp.remove(0);
+	}
+	function delAllpanel(){
+	var itmesLength=tp._items.length-1;
+	for(j=itmesLength;j>0;j--)
+	{
+	tp.remove(j);
+	}
+}	
+
+</script>
+
+<input type="hidden" id="xx" name="xx" value="" >
+</BODY>
+</HTML>		
+<script>
+  function refresh()
+  {
+    window.focus();
+    document.getElementById('xx').value="2"
+  }
+  
+</script>

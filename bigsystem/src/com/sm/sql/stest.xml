@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- <p>Employee SqlMap.</p> @genCode: CodeGenerator Tool @CreatedAt: Fri 
+	Nov 25 14:46:12 CST 2011 @author: SI-TECH @version: 1.0 -->
+<sqlMap namespace="stest">     <select id="findAllData" resultClass="java.util.HashMap">	   select service_id,service_name From tpesv_serv  </select></sqlMap>

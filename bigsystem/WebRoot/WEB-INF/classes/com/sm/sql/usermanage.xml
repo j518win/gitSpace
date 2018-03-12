@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="usermanage">
+
+    <select id="qryUserList" parameterClass="com.sm.user.bean.UserBean" resultClass="com.sm.user.bean.UserBean">
+        SELECT ID,
+               LOGINID,
+               PASSWORD,
+               USERTYPE,
+               USERNAME,
+               ADMINID,
+               CONTACTNO,
+               CITYID,
+               COMPANY,
+               REMARK,
+               ADMINFLAG,
+               STATUS
+          FROM SOS_USER
+         WHERE 1=1
+         <isNotEmpty prepend="and" property="loginId">
+            LOGINID like '%'||#loginId#||'%'
+         </isNotEmpty>
+         <isNotEmpty prepend="and" property="cityId">
+            CITYID = #cityId#
+         </isNotEmpty>
+    </select>
+
+	<select id="qryUser" parameterClass="com.sm.user.bean.UserBean" resultClass="com.sm.user.bean.UserBean">
+        SELECT ID,
+               LOGINID,
+		       PASSWORD,
+		       USERTYPE,
+		       USERNAME,
+		       ADMINID,
+		       CONTACTNO,
+		       CITYID,
+		       COMPANY,
+		       REMARK,
+		       ADMINFLAG,
+		       STATUS
+		  FROM SOS_USER
+		 WHERE LOGINID = #loginId#
+		 <isNotEmpty prepend="and" property="passWord">
+		    PASSWORD = #passWord#
+		 </isNotEmpty>
+		    LIMIT 1
+	</select>
+		
+	<insert id="createUser" parameterClass="com.sm.user.bean.UserBean">
+	   INSERT INTO SOS_USER
+		  (ID,
+		   LOGINID,
+		   PASSWORD,
+		   USERTYPE,
+		   USERNAME,
+		   ADMINID,
+		   CONTACTNO,
+		   CITYID,
+		   COMPANY,
+		   REMARK,
+		   ADMINFLAG,
+		   STATUS)
+		VALUES
+		  (#id#,
+		   #loginId#,
+		   #passWord#,
+		   #userType#,
+		   #userName#,
+		   #adminId#,
+		   #contactNo#,
+		   #cityId#,
+		   #company#,
+		   #remark#,
+		   #adminFlag#,
+		   #status#)
+	</insert>
+	
+	<update id="updateUser" parameterClass="com.sm.user.bean.UserBean">
+        UPDATE SOS_USER
+		   SET USERTYPE  = #userType#,
+		       USERNAME  = #userName#,
+		       ADMINID   = #adminId#,
+		       CONTACTNO = #contactNo#,
+		       CITYID    = #cityId#,
+		       COMPANY   = #company#,
+		       REMARK    = #remark#,
+		       ADMINFLAG = #adminFlag#,
+		       STATUS    = #status#
+		 WHERE LOGINID = #loginId#
+	</update>
+	
+	<update id="updatePassWd" parameterClass="com.sm.user.bean.UserBean">
+	    UPDATE SOS_USER
+	       SET PASSWORD = #passWord#
+	     WHERE LOGINID = #loginId#
+	       <isNotEmpty prepend="and" property="oldPassWd">
+               PASSWORD = #oldPassWd#
+           </isNotEmpty>
+	</update>
+	
+	<update id="modifyUserStatus" parameterClass="com.sm.user.bean.UserBean">
+	    UPDATE SOS_USER
+	       SET STATUS = #status#
+	     WHERE LOGINID = #loginId#
+	</update>
+	
+	<select id="createSeq" parameterClass="java.lang.String"  resultClass="java.lang.String">
+        SELECT $seqName$.NEXTVAL FROM DUAL	
+	</select>
+	
+	<select id="maxUserId" resultClass="java.lang.String">
+		SELECT max(id) from SOS_USER
+	</select>
+	
+	<select id="querymenu" parameterClass="java.lang.String" resultClass="java.util.HashMap">
+	   SELECT DISTINCT C.id AS ID,C.menuName AS NAME,C.URL AS CODE,C.parentId AS PARENTID
+		FROM sos_sys_user_role A,sos_sys_role_menu B,sos_sys_menu_info C
+		WHERE A.roleId=B.roleId AND B.menuId=C.id AND A.userId='$userId$'
+		AND A.ZT='1' AND B.ZT='1' AND C.ZT='1' order by ID
+  	</select>
+  	
+  		<select id="existRole" parameterClass="java.lang.String"
+		resultClass="java.util.HashMap">
+		SELECT A.USERID, A.ROLEID ,B.ROLENAME FROM SOS_SYS_USER_ROLE A
+		,SOS_SYS_ROLE_INFO B
+		WHERE A.USERID='$userId$' AND B.ID = A.ROLEID AND
+		A.ZT='1' AND B.ZT='1'
+	</select>
+
+	<select id="notExistRole" parameterClass="java.lang.String"
+		resultClass="java.util.HashMap">
+		SELECT A.ROLENAME,A.ID FROM SOS_SYS_ROLE_INFO A WHERE A.ZT='1'
+		AND NOT EXISTS (SELECT B.ID FROM SOS_SYS_USER_ROLE B WHERE B.ROLEID=A.ID
+		AND B.USERID='$userId$' AND B.ZT='1')
+	</select>
+	
+	<update id="deleteUserRole" parameterClass="java.lang.String">
+		UPDATE  SOS_SYS_USER_ROLE SET ZT='0' WHERE USERID='$userId$'
+	</update>
+
+	<insert id="addUserRole" parameterClass="java.util.HashMap">
+		INSERT INTO
+		SOS_SYS_USER_ROLE
+		(ID, USERID, ROLEID, CREATOR, CREATDATE, ZT)
+		VALUES(
+		#id#,
+		#userId#,
+		#roleId#,
+		#operator#,
+		sysdate,
+		'1'
+		)
+	</insert>
+
+	<select id="getMaxUserRole" resultClass="java.lang.String">
+		SELECT max(id) from SOS_SYS_USER_ROLE
+	</select>
+</sqlMap>

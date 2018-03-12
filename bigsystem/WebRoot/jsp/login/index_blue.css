@@ -1,0 +1,20 @@
+@import url('layout.css');
+body {
+	background-image: url(blue/bg.gif);
+}
+
+form {
+	text-align: left;
+}
+
+.login_main {
+	background-image: url(blue/main.gif);
+}
+
+.login_button {
+	background-image: url(blue/button.gif);
+}
+
+.login_a {
+	background: url(blue/link.gif);
+}

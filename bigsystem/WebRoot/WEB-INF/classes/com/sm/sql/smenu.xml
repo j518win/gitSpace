@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<!-- <p>Employee SqlMap.</p> @genCode: CodeGenerator Tool @CreatedAt: Fri 
+	Nov 25 14:46:12 CST 2011 @author: SI-TECH @version: 1.0 -->
+<sqlMap namespace="smenu">	<select id="menuQuery" resultClass="java.util.HashMap">		SELECT ID,MENUNAME,MENUDESC,URL,CASE WHEN menutype='0' THEN '父菜单'  ELSE '子菜单' END AS MENUTYPE FROM SOS_SYS_MENU_INFO WHERE ZT='1'	</select>		<select id="getMenuTree" resultClass="java.util.HashMap">	SELECT ID, MENUNAME, MENUTYPE, NM,URL, TARGET, PARENTID FROM SOS_SYS_MENU_INFO WHERE ZT='1'	</select>		<insert id="addMenu" parameterClass="java.util.HashMap">		INSERT INTO		SOS_SYS_MENU_INFO		(ID, MENUNAME, MENUDESC, URL,PARENTID,CREATOR, CREATDATE, ZT,MENUTYPE)		VALUES(		#maxId#,		#menuName#,		#menuDesc#,		#url#,		#parentId#,		#operator#,		sysdate,		'1',		#menuType#		)	</insert>		<select id="getMaxMenuId" resultClass="java.lang.String">		SELECT max(id) from SOS_SYS_MENU_INFO	</select></sqlMap>
